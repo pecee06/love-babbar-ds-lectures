@@ -1,0 +1,57 @@
+Tree is a non linear DS which have nodes and edges
+
+* For n nodes there are n-1 edges
+* nodes with same parent are siblings
+* nodes to which we can reach from one node are its descendants
+* while moving from a node to the root node, whichever nodes come in path are its ancestors
+* number of direct children of a node is its degree
+* degree of a tree is the maximum degree, a node of that tree can have
+* nodes with 0 direct children are called leaf nodes or external nodes. All other nodes are called internal nodes
+* to reach to a node from root node, the number of edges you need to traverse is the height of that node
+* collection of trees is called forest
+
+Tree with degree 2 is called a binary tree
+
+* with given n unlablled nodes one can draw (2n C n)/(n+1) binary trees. This is called Catalan formula
+* with given n lablled nodes one can draw (2n C n)*(n!)/(n+1) binary trees. This is called Catalan formula
+* maximum height of a binary tree with n nodes is n-1
+* number of binary treesn with n nodes of maximum height that can be drawn is 2^(n-1)
+* minimum height of a binary tree with n nodes is log(n+1)-1
+* minimum number of nodes in a binary tree of height h is h+1
+* maximum number of nodes in a binary tree of height h is (2^(h+1))-1
+* number of leaf nodes in a binary tree are always 1 more than the number of nodes with 2 direct children
+
+Types of binary tree:
+    * full/strict binary tree-> A binary tree with each node having either 0 or 2 direct children
+        * minimum number of nodes in a strict binary tree of height h is 2h+1
+        * maximum height of strict binary tree with n nodes = (n-1)/2
+        * external nodes = internal nodes + 1
+
+    * complete binary tree-> A binary tree, which if represented in an array, will have no blanks in between any 2 elements
+    * perfect binary tree-> A binary tree where all internal nodes have exactly 2 direct children and all leaf nodes are at the same level
+
+m-ary tree: A tree of degree m
+
+strict m-ary tree: degree of each node can either be 0 or m
+    * maximum number of nodes in a strict m-ary tree of height h is ((m^(h+1))-1)/(m-1)
+    * minimum number of nodes in a strict m-ary tree of height h is mh+1
+    * maximum height of a strict m-ary tree with n nodes = (n-1)/m
+    * minimum height of a strict m-ary tree with n nodes is logm(n(m-1)+1)-1
+    * external nodes = (m-1)*(internal nodes) + 1
+
+Representation of binary tree:
+    -> array representation
+        We make an array of size n (number of nodes) and store elements level wise (from top to bottom) in left to right fashion
+        index(leftChild) = 2*(index(root)+1)
+        index(rightChild) = (2*(index(root)+1))+1
+        index(parent) = index(child)/2
+
+    -> linked representation
+        We make nodes storing the pointer to leftChild, pointer to rightChild and the value of that node
+            * for n nodes there'll be n+1 NULL pointers in the binary tree
+
+Binary tree traversal:
+
+    => preorder - visit(node) -> preorder(leftChild) -> preorder(rightChild)
+    => inorder - inorder(leftChild) -> visit(node) -> inorder(rightChild)
+    => postorder - postorder(leftChild) -> postorder(rightChild) -> visit(node)

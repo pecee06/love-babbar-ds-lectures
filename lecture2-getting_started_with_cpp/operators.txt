@@ -1,0 +1,13 @@
+To perform operations, we need operators
+Operators may be unary (1 operand), binary (2 operands) or ternary (3 operands)
+
+Types of operators:
+    * Assignment (=,+=,-=,*=,/=)
+    * Arithmetic (+,-,*,/,%)
+    * Relational (<,>,<=,>=,==,!=) : returns bool value
+    * Logical (&&,||,!)
+    * Bitwise (& (AND),| (OR),~ (compliment),^ (XOR))
+    * Misc (++,--,ternary,...)
+        ternary operator -> <condition> ? (if true):(else)
+
+Operators work as expected only when associated operands are compatible with it

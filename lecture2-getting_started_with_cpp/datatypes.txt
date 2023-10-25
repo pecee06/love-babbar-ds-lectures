@@ -1,0 +1,28 @@
+There are 2 broad categories of datatypes:
+    * Primitive
+    * Non-primitive
+
+Primitive datatypes:
+    * int: There are 2 keywords we can use with "int" as a prefix - "signed" & "unsigned". The basic difference being, range of signed int is -(2^(n-1)) to (2^(n-1))-1 and that of unsigned int is 0 to (2^n)-1, for n number of bits. Now number of bits that int occupies depends upon compiler & system architecture, but generally it's 4 bytes (32 bits), meaning range of signed int is -2147483648 to 2147483647 and that of unsigned int is 0 to 4294967295. By default, int is signed
+
+    * char: stores character in single quotes, occupies 1 byte
+    * float: stores floating point number, occupies 4 bytes
+    * double: float but with a greater range, occupies 8 bytes
+    * bool: true(1) or false(0), occupies 1 bit, every number except 0 is considered true
+    * void: empty datatype
+
+To store data in C++:
+<datatype> <identifier-name> <assignment-operator> <value>;
+Eg. int a = 5;
+Eg. bool val = false;
+Eg. char letter = 'p';
+
+The <identifier-name> must not start with number, should not contain spaces, should not be a keyword (words which imply special meaning to compiler), should not contain special characters (except _ and $)
+
+It's interesting to note, that computers can't store anything other than 0s & 1s in the storage. So how exactly the conversion of so many datatypes to binary, takes place?
+
+int is a 32 bit datatype, meaning logically it have 32 blocks with each block having a value either 0 or 1. When we store an integer, it's in the decimal radix system, so the compiler converts that into binary via various algorithms and stores as an int
+
+Similar conversion algorithms are present for floating point numbers as well
+
+For converting characters into binary we don't have any mathematical algorithm. Rather we have mapped all the different characters to a certian decimal number as per a standard convention called ASCII table. Those decimal numbers are then converted to binary via mathematical algorithms
