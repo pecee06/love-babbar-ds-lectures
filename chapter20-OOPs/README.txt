@@ -66,7 +66,7 @@ When an object is assigned to another object using '=' operator, the property in
 
 Destructors-
 
-It frees the memory corresponding to an object. For static objects, it is called automatically, for dynamic ones, we have to free them manually using "delete" keyword
+It is called when memory corresponding to an object is freed. For static objects, it is called automatically, for dynamic ones, we have to call them manually using "delete" keyword
 
 Destructors too, like constructors are implicitely created by the compiler, though we can explicitely define them as well
 
@@ -126,36 +126,36 @@ Why encapsulation? -> It allows data hiding, provide security, code reusability
     Eg., a Dog class can inherit from an Animal class, because a Dog is an Animal
 
 Syntax:
-class <className>:<access modifier> <parent class>{
+class <className>:<access specifier> <super class>{
     // definition
 };
 
-Now what all data members and member functions will be accessible to the child class depends upon the combination of access modifiers used
+Now what all data members and member functions will be accessible to the child class depends upon the combination of access specifiers used
 
-members-of-super-class  inherited-as    scope
-----------------------  ------------    -----
-*public                 public          public
-*public                 private         private
-*public                 protected       protected
+members-of-super-class  inherited-as    scope-in-derived-class
+----------------------  ------------    -------------------
+public                  public          public
+public                  private         private
+public                  protected       protected
 
-*private                public         not accessible
-*private                private        not accessible
-*private                protected      not accessible
+private                 public          not accessible
+private                 private         not accessible
+private                 protected       not accessible
 
-*protected              public         protected
-*protected              private        private
-*protected              protected      protected
+protected               public          protected
+protected               private         private
+protected               protected       protected
 
 Protected members are those which can be accessed within the class in which they're defined and in their children classes
 
-Abstract Class: An abstract class in C++ is a class that has at least one pure virtual function. It is solely created to be used as a base class to other classes. We don't create its object
+Abstract Class: An abstract class in C++ is a class that has at least one pure virtual function. It is solely created to be used as a base class to other classes. We can't create its object
 
-A pure virtual function is a virtual function (It is a member function that is declared within a base class and is redefined (overridden) by a derived class) for which we can have an implementation, but we must override that function in the derived class
+A pure virtual function is a virtual function (It is a member function that is declared within a base class and is redefined (overridden) by a derived class) for which we don't provide an implementation, we must override that method in the derived class
 
 A pure virtual function is decalred like->
     virtual <return-type> <f-name>() = 0;
 
-* If we don't override the pure virtual function in the derived class, the derived class will also become an abstract class
+* If we don't override the pure virtual functions in the derived class, the derived class will also become an abstract class
 
 Types of inheritance-
 
@@ -174,7 +174,7 @@ The main difference between multilevel inheritance and hierarchical inheritance 
 (e) Hybrid: It is a type of inheritance that combines two or more different types of inheritance
 
 Resolving ambiguity:
-If a class inherits multiple classes (multiple inheritance) and they contain methods of same name (same parameters as well), then to resolve this ambiguity, when a method of an object of child class is to be called, scope resolution operator is used with the parent class whose method is to be called
+If a class inherits multiple classes (multiple inheritance) and they contain methods of same name (same parameters as well), then to resolve this ambiguity of choosing an instance of a method of an object of child class, scope resolution operator is used with the parent class whose method is to be called
 
 Eg.
 class A{
@@ -193,7 +193,7 @@ main(){
     obj.B::f();
 }
 
-In case of hierarchical inheritance, say the derived class is inherited from 2 classes and both of them were derived from a single class. This will create ambiguity for compiler for choosing between same members (of grandparent) from 2 base classes
+In case of hierarchical inheritance, say the derived class is inherited from 2 classes and both of them were derived from a single class. This will create ambiguity for compiler in choosing between same members (of grandparent) from 2 base classes
 
 For handling this, we use virtual base classes
 Virtual base class is a way of preventing multiple instances of a given class from appearing in an inheritance hierarchy when using multiple inheritance
@@ -219,34 +219,68 @@ Eg. I am an individual, my role in college is different from my role in hostel, 
 
 Types of polymorphism:
 
-(a) Compile time polymorphism: It is a type of polymorphism that is resolved by the compiler. This means that the compiler determines which method to call at compile time, based on the type of object that is being used. It is achieved using function overloading and operator overloading
+(a) Compile time polymorphism: It is a type of polymorphism that is resolved by the compiler at compile time. This means that the compiler determines which method to call at compile time, based on the type of object that is being used. It is achieved using method overloading and operator overloading
 
-Method overloading: This allows a class to have multiple member functions of the same name with different parameters. Their return type may or may not be different
+Method overloading: This allows a class to have multiple member functions with same name but different parameters. Their return type may or may not be different
 
-Operator overloading: It is a feature of object-oriented programming that allows you to redefine the behavior of operators for custom types. The compiler will determine which behavior to use based on the types of the operands
+Eg.
+class A{
+public:
+    void greet(){
+        cout<<"Hello\n";
+    }
+    void greet(string name){
+        cout<<"Hello "<<name<<endl;
+    }
+};
 
-(b) Run time polymorphism: It is a type of polymorphism that is resolved at runtime. This means that the compiler does not know which method to call until the program is running. It is achieved using method overriding.
+Operator overloading: It is a feature of object-oriented programming that allows us to redefine the behavior of operators with objects. The compiler will determine which behavior to use based on the types of the operands
+
+Eg.
+class Complex{
+public:
+    int x,y;
+    Complex(int x, int y){
+        this->x = x;
+        this->y = y;
+    }
+    void operator+(Complex z){
+        int real = this->x + z.x;
+        int img = this->y + z.y;
+        cout<<real<<" + i"<<img<<endl;
+    }
+};
+
+(b) Run time polymorphism: It is a type of polymorphism that is resolved at runtime. This means that the compiler doesn't know which method to call beforehand. It is achieved using method overriding.
 
 Method overriding: It is a feature of object-oriented programming that allows a subclass to provide its own implementation of a method that is defined in its superclass
 
-* We use virtual functions to indicate that the function is overridden
+* We use virtual functions in superclass to mark it for compiler, as it could be overridden eventually
+
+* Mentioning a method as "virtual" in a base class won't constraint you to override it in the derived class. It basically allows to call a subclass member method (also present in super class) with a pointer of type superclass
 
 Eg.
 class Base{
 public:
     virtual void print(){
-        cout <<"Base Function"<< endl;
+        cout <<"Base\n";
     }
 };
 
 class Derived :public Base{
 public:
     void print(){
-        cout <<"Derived Function"<< endl;
+        cout <<"Derived\n";
     }
 };
 
-* Though mentioning a function as virtual in a base class won't constraint you to override it in the derived class
+Derived d;
+Base* ptr = &d;
+ptr->print();    // will print "Derived"
+
+Base b;
+ptr = &b;
+ptr->print();    // will print "Base"
 
 4. Abstraction-
 
